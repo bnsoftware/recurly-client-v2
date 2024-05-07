@@ -444,6 +444,44 @@ class Recurly_SubscriptionTest extends Recurly_TestCase
     $this->assertEquals('gold', $subscription->plan_code);
   }
 
+  public function testUpdateSubscriptionWithProrationSettings() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
+
+    $subscription->unit_amount_in_cents = 0;
+    $subscription->subscription_add_ons[0]->unit_amount_in_cents = 100;
+
+    $subscription->proration_settings = new Recurly_ProrationSettings();
+    $subscription->proration_settings->charge = 'prorated_amount';
+    $subscription->proration_settings->credit = 'prorated_amount';
+
+    $this->assertXmlStringEqualsXmlString("
+    <subscription>
+      <unit_amount_in_cents>0</unit_amount_in_cents>
+      <subscription_add_ons>
+        <subscription_add_on>
+          <add_on_code>marketing_emails</add_on_code>
+          <unit_amount_in_cents>100</unit_amount_in_cents>
+          <quantity>1</quantity>
+        </subscription_add_on>
+        <subscription_add_on>
+          <item>&lt;Recurly_Stub[item] href=https://api.recurlyqa.com/v2/items/mockitem&gt;</item>
+          <external_sku>tester-sku</external_sku>
+          <add_on_code>mockitem</add_on_code>
+          <unit_amount_in_cents>199</unit_amount_in_cents>
+          <quantity>1</quantity>
+          <revenue_schedule_type>never</revenue_schedule_type>
+          <tier_type>flat</tier_type>
+          <add_on_source>item</add_on_source>
+        </subscription_add_on>
+      </subscription_add_ons>
+      <proration_settings>
+        <charge>prorated_amount</charge>
+        <credit>prorated_amount</credit>
+      </proration_settings>
+    </subscription>", $subscription->xml());
+  }
+
   public function testUpdateNotes() {
     $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200.xml');
     $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/notes', 'subscriptions/show-200-changed-notes.xml');

@@ -48,6 +48,7 @@
  * @property-read DateTime $activated_at Date the subscription was activated
  * @property-read DateTime $updated_at Date the subscription was last updated
  * @property Recurly_CustomFieldList $custom_fields Optional custom fields for the subscription.
+ * @property Recurly_ProrationSettings $proration_settings Optional proration settings for the subscription update. Determines how any resulting charge/credit invoices are applied during an update.
  * @property string $uuid Subscription's unique identifier.
  * @property string $timeframe now for immediate, renewal to perform when the subscription renews. This must be one of 'now', 'bill_date', or 'term_end'. Defaults to 'now'
  * @property string $gateway_code The unique identifier of a payment gateway used to specify which payment gateway you wish to process this subscriptions’ payments
@@ -338,7 +339,7 @@ class Recurly_Subscription extends Recurly_Resource
       'terms_and_conditions', 'customer_notes', 'vat_reverse_charge_notes',
       'bank_account_authorized_at', 'revenue_schedule_type', 'gift_card',
       'shipping_address', 'shipping_address_id', 'imported_trial',
-      'remaining_pause_cycles', 'custom_fields', 'auto_renew',
+      'remaining_pause_cycles', 'custom_fields', 'proration_settings', 'auto_renew',
       'renewal_billing_cycles', 'gateway_code', 'shipping_method_code',
       'shipping_amount_in_cents', 'transaction_type', 'tax_inclusive',
       'ramp_intervals', 'action_result'

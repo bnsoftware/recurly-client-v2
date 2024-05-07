@@ -83,6 +83,7 @@ require_once(__DIR__ . '/recurly/plan.php');
 require_once(__DIR__ . '/recurly/plan_list.php');
 require_once(__DIR__ . '/recurly/ramp_interval.php');
 require_once(__DIR__ . '/recurly/plan_ramp_interval.php');
+require_once(__DIR__ . '/recurly/proration_settings.php');
 require_once(__DIR__ . '/recurly/purchase.php');
 require_once(__DIR__ . '/recurly/redemption.php');
 require_once(__DIR__ . '/recurly/redemption_list.php');
