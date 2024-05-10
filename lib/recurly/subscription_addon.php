@@ -49,13 +49,4 @@ class Recurly_SubscriptionAddOn extends Recurly_Resource
     );
     return array_diff_key($this->_values, $immutable);
   }
-
-  /**
-   * Pretty string version of the object
-   */
-  public function __toString() {
-    $class = get_class($this);
-    $values = $this->__valuesString();
-    return "<$class $values>";
-  }
 }
