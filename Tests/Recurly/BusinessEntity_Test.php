@@ -30,6 +30,8 @@ class Recurly_BusinessEntityTest extends Recurly_TestCase
     $this->assertEquals($business_entity->tax_address->city, 'Oakland');
     $this->assertEquals($business_entity->tax_address->country, 'US');
     $this->assertEquals($business_entity->tax_address->phone, '718-555-1234');
+    $this->assertEquals($business_entity->origin_tax_address_source, 'Business entity tax address');
+    $this->assertEquals($business_entity->destination_tax_address_source, 'Customer tax address');
     $this->assertEquals($business_entity->default_vat_number, '1234');
     $this->assertEquals($business_entity->default_registration_number, '5678');
     $this->assertInstanceOf('DateTime', $business_entity->created_at);

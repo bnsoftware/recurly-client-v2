@@ -28,6 +28,8 @@
  * @property string $tax_type The tax type of the adjustment.
  * @property string $tax_region The tax region of the adjustment.
  * @property float $tax_rate The tax rate of the adjustment.
+ * @property string $origin_tax_address_source The source of the address that will be used as the "origin" in determining taxes.
+ * @property string $destination_tax_address_source The source of the address that will be used as the "destination" in determining taxes.
  * @property boolean $tax_exempt true exempts tax on the charge, false applies tax on the charge. If not defined, then defaults to the Plan and Site settings. This attribute does not work for credits (negative adjustments). Credits are always post-tax. Pre-tax discounts should use the Coupons feature.
  * @property mixed[] $tax_details The nested address information of the adjustment: name, type, tax_rate, tax_in_cents.
  * @property string $tax_code Optional field for EU VAT merchants and Avalara AvaTax Pro merchants. If you are using Recurly's EU VAT feature, you can use values of unknown, physical, or digital. If you have your own AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.
@@ -134,7 +136,8 @@ class Recurly_Adjustment extends Recurly_Resource
       'accounting_code', 'tax_exempt', 'tax_inclusive', 'tax_code', 'start_date', 'end_date',
       'revenue_schedule_type', 'origin', 'product_code', 'credit_reason_code',
       'shipping_address', 'shipping_address_id', 'item_code', 'external_sku', 'custom_fields',
-      'revenue_gl_account_id', 'liability_gl_account_id', 'performance_obligation_id'
+      'revenue_gl_account_id', 'liability_gl_account_id', 'performance_obligation_id',
+      'origin_tax_address_source', 'destination_tax_address_source'
     );
   }
 }

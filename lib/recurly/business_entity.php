@@ -10,6 +10,8 @@
  * @property string $default_liability_gl_account_id
  * @property Recurly_Address $invoice_display_address The nested invoice address information of the business entity: address1, address2, city, state, zip, country, phone.
  * @property Recurly_Address $tax_address The nested tax address information of the business entity: address1, address2, city, state, zip, country, phone.
+ * @property string $origin_tax_address_source The source of the address that will be used as the "origin" in determining taxes.
+ * @property string $destination_tax_address_source The source of the address that will be used as the "destination" in determining taxes.
  * @property Recurly_SubscriberLocationCountry[] $subscriber_location_countries
  * @property string $default_vat_number
  * @property string $default_registration_number
