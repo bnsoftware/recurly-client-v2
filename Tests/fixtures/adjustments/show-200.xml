@@ -26,6 +26,8 @@ Content-Type: application/xml; charset=utf-8
   <tax_in_cents type="integer">5000</tax_in_cents>
   <total_in_cents type="integer">1200</total_in_cents>
   <currency>USD</currency>
+  <origin_tax_address_source>Business entity tax address</origin_tax_address_source>
+  <destination_tax_address_source>Customer tax address</destination_tax_address_source>
   <tax_exempt type="boolean">false</tax_exempt>
   <tax_details type="array">
     <tax_detail>
