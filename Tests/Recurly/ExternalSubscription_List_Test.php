@@ -24,6 +24,8 @@ class Recurly_ExternalSubscriptionListTest extends Recurly_TestCase
     $this->assertEquals($external_subscription->state, 'active');
     $this->assertEquals($external_subscription->auto_renew, false);
     $this->assertEquals($external_subscription->in_grace_period, false);
+    $this->assertEquals($external_subscription->imported, false);
+    $this->assertEquals($external_subscription->test, false);
     $this->assertInstanceOf('DateTime', $external_subscription->canceled_at);
     $this->assertInstanceOf('DateTime', $external_subscription->expires_at);
     $this->assertInstanceOf('DateTime', $external_subscription->trial_started_at);
