@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.14.11](https://github.com/recurly/recurly-client-php/tree/2.14.11) (2024-07-03)
+
+[Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.10...2.14.11)
+
+
+**Merged Pull Requests**
+
+- GET external_subscription by external_id - V2 PHP [#816](https://github.com/recurly/recurly-client-php/pull/816) ([paulorbpinho-fullstacklabs](https://github.com/paulorbpinho-fullstacklabs))
+- Add taxable address sources to business entity and adjustment [#815](https://github.com/recurly/recurly-client-php/pull/815) ([ELepolt](https://github.com/ELepolt))
+- SubscriptionAddon: fix call to undefined method Recurly_SubscriptionAddOn::__valuesString() [#811](https://github.com/recurly/recurly-client-php/pull/811) ([glaubinix](https://github.com/glaubinix))
+- Added support for `proration_settings` for updating subscriptions [#809](https://github.com/recurly/recurly-client-php/pull/809) ([csampson](https://github.com/csampson))
+
+
+
 ## [2.14.10](https://github.com/recurly/recurly-client-php/tree/2.14.10) (2024-04-04)
 
 [Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.9...2.14.10)
