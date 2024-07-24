@@ -150,6 +150,42 @@ class Recurly_InvoiceTest extends Recurly_TestCase
     $this->assertEquals($refund_invoice->subtotal_in_cents, -1000);
   }
 
+  public function testRefundPercentage() {
+    $this->client->addResponse('POST', 'https://api.recurly.com/v2/invoices/1001/refund', 'invoices/refund-201.xml');
+    $invoice = Recurly_Invoice::get('1001', $this->client);
+
+    $refund_invoice = $invoice->refundPercentage(10);
+    $this->assertEquals($refund_invoice->subtotal_in_cents, -1000);
+  }
+
+  public function testLineItemRefundWithPercentage() {
+    $this->client->addResponse('POST', 'https://api.recurly.com/v2/invoices/1001/refund', 'invoices/refund-201.xml');
+    $invoice = Recurly_Invoice::get('1001', $this->client);
+    $line_items = $invoice->line_items;
+
+    $adjustment_map = function($line_item) {
+      return $line_item->toRefundAttributesWithPercentage(20);
+    };
+    $adjustments = array_map($adjustment_map, $line_items);
+
+    $refund_invoice = $invoice->refund($adjustments);
+    $this->assertEquals($refund_invoice->subtotal_in_cents, -1000);
+  }
+
+  public function testLineItemRefundWithAmountInCents() {
+    $this->client->addResponse('POST', 'https://api.recurly.com/v2/invoices/1001/refund', 'invoices/refund-201.xml');
+    $invoice = Recurly_Invoice::get('1001', $this->client);
+    $line_items = $invoice->line_items;
+
+    $adjustment_map = function($line_item) {
+      return $line_item->toRefundAttributesWithAmountInCents(100);
+    };
+    $adjustments = array_map($adjustment_map, $line_items);
+
+    $refund_invoice = $invoice->refund($adjustments);
+    $this->assertEquals($refund_invoice->subtotal_in_cents, -1000);
+  }
+
   public function testRefund() {
     $this->client->addResponse('POST', 'https://api.recurly.com/v2/invoices/1001/refund', 'invoices/refund-201.xml');
     $invoice = Recurly_Invoice::get('1001', $this->client);
