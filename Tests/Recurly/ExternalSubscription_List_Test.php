@@ -30,6 +30,7 @@ class Recurly_ExternalSubscriptionListTest extends Recurly_TestCase
     $this->assertInstanceOf('DateTime', $external_subscription->expires_at);
     $this->assertInstanceOf('DateTime', $external_subscription->trial_started_at);
     $this->assertInstanceOf('DateTime', $external_subscription->trial_ends_at);
+    $this->assertEquals($external_subscription->uuid, '72bb9966bb5dc3767461ce4368a6b366');
     $external_product_reference = $external_subscription->external_product_reference;
     $this->assertEquals($external_product_reference->id, 'rauqpcdmxc4a');
     $this->assertEquals($external_product_reference->reference_code, '1234');

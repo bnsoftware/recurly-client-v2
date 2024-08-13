@@ -4,6 +4,7 @@
  * @property Recurly_Stub $account
  * @property Recurly_ExternalProductReference $external_product_reference
  * @property Recurly_ExternalPaymentPhase[] $external_payment_phases
+ * @property string $uuid
  * @property DateTime $last_purchased
  * @property boolean $auto_renew
  * @property boolean $in_grace_period
@@ -43,6 +44,16 @@ class Recurly_ExternalSubscription extends Recurly_Resource
     return Recurly_Base::_get(Recurly_ExternalSubscription::uriForExternalSubscriptionExternalId($external_id), $client);
   }
 
+  /**
+ * @param $uuid
+ * @param Recurly_Client $client Optional client for the request, useful for mocking the client
+ * @return Recurly_ExternalSubscription|null
+ * @throws Recurly_Error
+ */
+public static function getByUuid($uuid, $client = null) {
+  return Recurly_Base::_get(Recurly_ExternalSubscription::uriForExternalSubscriptionUuid($uuid), $client);
+}
+
   public function getExternalPaymentPhase($external_payment_phase_uuid, $client = null) {
     return Recurly_Base::_get($this->uriForExternalPaymentPhase() . '/' . $external_payment_phase_uuid, $client);
   }
@@ -60,6 +71,10 @@ class Recurly_ExternalSubscription extends Recurly_Resource
 
   protected static function uriForExternalSubscriptionExternalId($external_id) {
     return self::_safeUri(Recurly_Client::PATH_EXTERNAL_SUBSCRIPTIONS, "external-id-$external_id");
+  }
+
+  protected static function uriForExternalSubscriptionUuid($uuid) {
+    return self::_safeUri(Recurly_Client::PATH_EXTERNAL_SUBSCRIPTIONS, "uuid-$uuid");
   }
 
   protected function uriForExternalPaymentPhase() {
