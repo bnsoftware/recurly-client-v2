@@ -79,20 +79,29 @@ class Recurly_Adjustment extends Recurly_Resource
    * @throws Recurly_Error if the adjustment cannot be refunded.
    */
   public function refund($quantity = null, $prorate = false, $refund_apply_order = 'credit_first') {
-    if ($this->state == 'pending') {
-      throw new Recurly_Error("Only invoiced adjustments can be refunded");
-    }
+    $this->checkRefundable();
     $invoice = $this->invoice->get();
     return $invoice->refund($this->toRefundAttributes($quantity, $prorate), $refund_apply_order);
   }
 
   public function refundWithDecimal($quantity_decimal = null, $prorate = false, $refund_apply_order = 'credit_first') {
-    if ($this->state == 'pending') {
-      throw new Recurly_Error("Only invoiced adjustments can be refunded");
-    }
+    $this->checkRefundable();
     $invoice = $this->invoice->get();
     return $invoice->refund($this->toRefundAttributesWithDecimal($quantity_decimal, $prorate), $refund_apply_order);
   }
+
+  public function refundWithPercentage($percentage, $prorate = false, $refund_apply_order = 'credit_first') {
+    $this->checkRefundable();
+    $invoice = $this->invoice->get();
+    return $invoice->refund($this->toRefundAttributesWithPercentage($percentage, $prorate), $refund_apply_order);
+  }
+
+  public function refundWithAmountInCents($amount_in_cents, $prorate = false, $refund_apply_order = 'credit_first') {
+    $this->checkRefundable();
+    $invoice = $this->invoice->get();
+    return $invoice->refund($this->toRefundAttributesWithAmountInCents($amount_in_cents, $prorate), $refund_apply_order);
+  }
+
   /**
    * Converts this adjustment into the attributes needed for a refund.
    *
@@ -113,6 +122,14 @@ class Recurly_Adjustment extends Recurly_Resource
     return array('uuid' => $this->uuid, 'quantity_decimal' => $quantity_decimal, 'prorate' => $prorate);
   }
 
+  public function toRefundAttributesWithPercentage($percentage, $prorate = false) {
+    return array('uuid' => $this->uuid, 'percentage' => $percentage, 'prorate' => $prorate);
+  }
+
+  public function toRefundAttributesWithAmountInCents($amount_in_cents, $prorate = false) {
+    return array('uuid' => $this->uuid, 'amount_in_cents' => $amount_in_cents, 'prorate' => $prorate);
+  }
+
   protected function createUriForAccount() {
     return self::_safeUri(Recurly_Client::PATH_ACCOUNTS, $this->account_code, Recurly_Client::PATH_ADJUSTMENTS);
   }
@@ -123,6 +140,12 @@ class Recurly_Adjustment extends Recurly_Resource
       parent::populateXmlDoc($doc, $adjustmentNode, $obj, $nested);
     } else {
       parent::populateXmlDoc($doc, $node, $obj, $nested);
+    }
+  }
+
+  private function checkRefundable() {
+    if ($this->state == 'pending') {
+        throw new Recurly_Error("Only invoiced adjustments can be refunded");
     }
   }
 

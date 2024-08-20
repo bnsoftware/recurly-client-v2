@@ -196,6 +196,23 @@ class Recurly_Invoice extends Recurly_Resource
   }
 
   /**
+   * Refunds a percentage from the invoice and returns a refund invoice
+   * @param int $percentage percentage to refund from this invoice
+   * @param string $refund_method indicates the refund order to apply, valid options: {'credit_first','transaction_first','all_transaction','all_credit'}, defaults to 'credit_first'
+   * @return object Recurly_Invoice a new refund invoice
+   * @throws Recurly_Error
+   */
+  public function refundPercentage($percentage, $refund_method = 'credit_first') {
+    $doc = XmlTools::createDocument();
+
+    $root = $doc->appendChild($doc->createElement($this->getNodeName()));
+    $root->appendChild($doc->createElement('refund_method', $refund_method));
+    $root->appendChild($doc->createElement('percentage', $percentage));
+
+    return $this->createRefundInvoice(XmlTools::renderXML($doc));
+  }
+
+  /**
    *
    * Refunds given line items from an invoice and returns new refund invoice
    *
@@ -216,8 +233,10 @@ class Recurly_Invoice extends Recurly_Resource
     foreach ($line_items as $line_item) {
       $adjustment_node = $line_items_node->appendChild($doc->createElement('adjustment'));
       $adjustment_node->appendChild($doc->createElement('uuid', $line_item['uuid']));
-      $adjustment_node->appendChild($doc->createElement('quantity', $line_item['quantity']));
       $adjustment_node->appendChild($doc->createElement('prorate', $line_item['prorate'] ? 'true' : 'false'));
+      if (isset($line_item['quantity'])) { $adjustment_node->appendChild($doc->createElement('quantity', $line_item['quantity'])); }
+      if (isset($line_item['percentage'])) { $adjustment_node->appendChild($doc->createElement('percentage', $line_item['percentage'])); }
+      if (isset($line_item['amount_in_cents'])) { $adjustment_node->appendChild($doc->createElement('amount_in_cents', $line_item['amount_in_cents'])); }
     }
 
     return $this->createRefundInvoice(XmlTools::renderXML($doc));
