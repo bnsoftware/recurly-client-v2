@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.14.12](https://github.com/recurly/recurly-client-php/tree/2.14.12) (2024-08-21)
+
+[Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.11...2.14.12)
+
+
+**Merged Pull Requests**
+
+- Added support for refunding invoices and line items [#818](https://github.com/recurly/recurly-client-php/pull/818) ([andcoca](https://github.com/andcoca))
+
+
+
 ## [2.14.11](https://github.com/recurly/recurly-client-php/tree/2.14.11) (2024-07-03)
 
 [Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.10...2.14.11)
