@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.14.13](https://github.com/recurly/recurly-client-php/tree/2.14.13) (2024-08-28)
+
+[Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.12...2.14.13)
+
+
+**Merged Pull Requests**
+
+- Get external sub by uuid [#820](https://github.com/recurly/recurly-client-php/pull/820) ([amandamfielding](https://github.com/amandamfielding))
+
+
+
 ## [2.14.12](https://github.com/recurly/recurly-client-php/tree/2.14.12) (2024-08-21)
 
 [Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.11...2.14.12)
