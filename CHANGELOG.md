@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.14.14](https://github.com/recurly/recurly-client-php/tree/2.14.14) (2024-11-13)
+
+[Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.13...2.14.14)
+
+
+**Merged Pull Requests**
+
+- adds vertex_transaction_type to v2 php [#827](https://github.com/recurly/recurly-client-php/pull/827) ([faiberrec](https://github.com/faiberrec))
+
+
+
 ## [2.14.13](https://github.com/recurly/recurly-client-php/tree/2.14.13) (2024-08-28)
 
 [Full Changelog](https://github.com/recurly/recurly-client-php/compare/2.14.12...2.14.13)
