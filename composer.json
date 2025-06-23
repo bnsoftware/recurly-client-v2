@@ -1,5 +1,5 @@
 {
-    "name": "recurly/recurly-client",
+    "name": "bnsoftware/recurly-client-v2",
     "type": "library",
     "description": "The PHP client library for the Recurly API",
     "keywords": ["recurly", "payments", "pay"],
